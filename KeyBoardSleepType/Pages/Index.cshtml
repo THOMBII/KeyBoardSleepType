@@ -1,0 +1,150 @@
+﻿@page
+@model IndexModel
+
+
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="content">
+    <div class="MainContent">
+        <form method="post">
+            @Html.AntiForgeryToken()
+            <input type="text" id="inputData" autocomplete="off" spellcheck="false" class="InputTextStile" />
+        </form>
+
+        <div class="NoteWrapper">
+            <p id="CompareTextLine1">@Model.Lines[0]</p>
+            <p id="CompareTextLine2">@Model.Lines[1]</p>
+            <p id="CompareTextLine3">@Model.Lines[2]</p>
+            <p id="CompareTextLine4">@Model.Lines[3]</p>
+        </div>
+
+        <div class="AllKeyBoard" id="AllKeyBoard">
+            <div class="Line sup">
+                <div id="key_1">Ё</div>
+                <div id="key_2">
+                    1
+                    <sup>!</sup>
+                </div>
+                <div id="key_3">
+                    2
+                    <sup>"</sup>
+                </div>
+                <div id="key_4">
+                    3
+                    <sup>#</sup>
+                </div>
+                <div id="key_5">
+                    4
+                    <sup>$</sup>
+                </div>
+                <div id="key_6">
+                    5
+                    <sup class="m-0">%</sup>
+                </div>
+                <div id="key_7">
+                    6
+                    <sup>^</sup>
+                </div>
+                <div id="key_8">
+                    7
+                    <sup>?</sup>
+                </div>
+                <div id="key_9">
+                    8
+                    <sup>*</sup>
+                </div>
+                <div id="key_10">
+                    9
+                    <sup>(</sup>
+                </div>
+                <div id="key_11">
+                    0
+                    <sup>)</sup>
+                </div>
+                <div id="key_12">
+                    _
+                    <sup>-</sup>
+                </div>
+                <div id="key_13">
+                    =
+                    <sup class="m-0">+</sup>
+                </div>
+                <div id="key_BackSpace" class="BackSpace sys">
+                    BackSpace
+                </div>
+            </div>
+            <div class="Line">
+                <div class="Tab sys" id="sys">Tab</div>
+                <div id="key_14">Й</div>
+                <div id="key_15">Ц</div>
+                <div id="key_16">У</div>
+                <div id="key_17">К</div>
+                <div id="key_18">Е</div>
+                <div id="key_19">Н</div>
+                <div id="key_20">Г</div>
+                <div id="key_21">Ш</div>
+                <div id="key_22">Щ</div>
+                <div id="key_23">З</div>
+                <div id="key_24">Х</div>
+                <div id="key_25">Ъ</div>
+                <div id="key_26">\</div>
+            </div>
+            <div id="l" class="Line">
+                <div class="Caps sys" id="key_27 sys">Caps</div>
+                <div id="key_28">Ф</div>
+                <div id="key_29">Ы</div>
+                <div id="key_30">В</div>
+                <div id="key_31">А</div>
+                <div id="key_32">П</div>
+                <div id="key_33">Р</div>
+                <div id="key_34">О</div>
+                <div id="key_35">Л</div>
+                <div id="key_36">Д</div>
+                <div id="key_37">Ж</div>
+                <div id="key_38">Э</div>
+                <div class="Enter sys">Enter</div>
+            </div>
+            <div class="Line sup">
+                <div class="Shift_L sys">Shift</div>
+                <div id="key_39">Я</div>
+                <div id="key_40">Ч</div>
+                <div id="key_41">С</div>
+                <div id="key_42">М</div>
+                <div id="key_43">И</div>
+                <div id="key_44">Т</div>
+                <div id="key_45">Ь</div>
+                <div id="key_46">Б</div>
+                <div id="key_47">Ю</div>
+                <div id="key_48">
+                    .
+                    <sup>,</sup>
+                </div>
+                <div class="Shift_R sys">Shift</div>
+            </div>
+            <div class="Line">
+                <div class="Space" id="key_50"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="InfoBar">
+        <div class="ImgAllStyle">
+            <ul>
+                <li>
+                    <img src="~/images/CountKeys.png" class="IMGStyle " />
+                    <p class="ResultView" id="total_number_substring"> - (--/--)</p>
+                </li>
+                <li>
+                    <img src="~/images/CountError.png" class="IMGStyle mt-2" />
+                    <p class="ResultView" id="total_Count_Error"> - (--/--)</p>
+                </li>
+                <li>
+                    <img src="~/images/Speed.png" class="IMGStyle mt-2" />
+                    <p class="ResultView"> - (--/--)</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

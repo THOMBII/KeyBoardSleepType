@@ -1,0 +1,233 @@
+﻿html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #2d3944;
+}
+
+ul {
+    list-style: none;
+    padding: 4%;
+}
+
+li {
+    display: flex;
+    align-items: center; /* Выравнивает элементы по вертикали */
+}
+
+p{
+    margin: 0;
+}
+
+.ResultView {
+    color: white;
+    width: 70px;
+    padding-left: 7px;
+}
+
+.container {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+}
+
+@media screen and (max-width: 2680px) {
+
+    .container {
+        width: 100%;
+    }
+
+    .MainContent {
+        width: 100%;
+        padding-left: 15%;
+        padding-right: 20%;
+    }
+
+    .InfoBar {
+        border-left: 2px solid #0dcaf0;
+        border-bottom: 2px solid #0dcaf0;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+
+
+    .MainContent {
+        width: calc(100% - 70px);
+        padding-left: 10%;
+        padding-right: 15%;
+    }
+}
+
+
+@media screen and (max-width: 736px) {
+
+
+
+    .MainContent {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .InfoBar {
+        border: none;
+    }
+}
+
+/*@media screen and (max-widht: 850px){
+    .InfoBar {
+        border: none;
+    }
+}*/
+
+
+/*Область где отображается текст*/
+.NoteWrapper {
+    margin-top: 1%;
+    /*border-bottom: 1px solid #f5f4f0;*/
+    color: white;
+    width: 720px;
+}
+
+/*Стили строки для ввода текса*/
+.InputTextStile {
+    background-color: transparent;
+    color: white;
+    transition: background-color 0.6s;
+    width: 760px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+
+.InputTextStileError {
+    transition: background-color 0.6s;
+    background-color: gold;
+    width: 760px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+
+
+input:focus{
+    outline: none;
+}
+
+/*Стили основного контента*/
+.MainContent {
+    width: 88%;
+    margin-top: 5%;
+}
+
+.ViewMainText{
+    width: 70%;
+    color: white;
+}
+/*Стили информационой панели*/
+.InfoBar {
+    width: 12%;
+    flex: 1;
+    height: 33vh;
+    /*border-start border-bottom border-2 border-info border-left*/
+}
+
+.content {
+    display: flex;  
+}
+
+.BackLightKey {
+    transition: background-color 0.6s;
+    background-color: aqua;
+}
+
+
+.AllKeyBoard{
+    width:750px;
+    margin-left: 0%;
+    margin-top: 120px;
+}
+
+div.AllKeyBoard .Line div {
+    height: 50px;
+    width: 50px;
+    border: 1px solid white;
+    line-height: 40px;
+    font-size: 15px;
+    float: left;
+    margin: 1px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+}
+
+.IMGStyle {
+    width: 35px;
+    height: 35px;
+}
+
+.ImgAllStyle {
+
+}
+
+div.AllKeyBoard sup {
+    margin-left: 5px;
+}
+
+div.AllKeyBoard div.sys{
+    font-size: 8px;
+    color: dimgray;
+}
+
+#AllKeyBoard div.BackSpace {
+    width: 55px;
+}
+
+#AllKeyBoard div.Caps {
+    width: 70px;
+}
+
+#AllKeyBoard div.Enter {
+    width: 87px;
+}
+
+#AllKeyBoard div.Shift_L {
+    width: 100px;
+}
+
+#AllKeyBoard div.Shift_R {
+    width: 109px;
+}
+
+#AllKeyBoard div.Space {
+    width: 300px;
+    margin-left: 210px;
+}
+
+#AllKeyBoard div.Tab {
+    width: 55px;
+}
+
+#AllKeyBoard div.BackSlash {
+    width: 46px;
+}
