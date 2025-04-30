@@ -1,0 +1,21 @@
+﻿<div id="myNav" class="overlay">
+
+    <!-- Кнопка для закрытия навигации наложения -->
+    <link rel="stylesheet" href="~/css/LeftPanel.css" />
+    <script src="~/js/LeftPanel.js"></script>
+    <a class="closebtn" onclick="closeNav()">&times;</a>
+
+    <!-- Верхний слой содержимого -->
+    <div class="overlay-content">
+        <a asp-page="/Index">1</a>
+        <a href="#">2</a>
+        <a asp-page="/CountWordsInput">3</a>
+        <a asp-page="/WordsInput">4</a>
+    </div>
+
+</div>
+
+<!-- Используйте любой элемент для открытия / отображения меню навигации наложения -->
+<div>
+    <a><div class="LeftPanelContent" onclick="openNav()"></div></a>
+</div>

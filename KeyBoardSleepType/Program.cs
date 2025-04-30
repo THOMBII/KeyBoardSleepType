@@ -1,29 +1,33 @@
 using KeyBoardSleepType.models;
 using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Npgsql;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContextFactory<ApplicationDbContext>(option =>
-{
-    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+var conn = "Host=localhost;Port=5433;Database=SleepType;User ID=postgres;Password=ss";
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(conn));
+
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(200);
+    options.IdleTimeout = TimeSpan.FromSeconds(400);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddHttpContextAccessor();
 
 
 builder.Services.AddSingleton<InputModel>();
+
 
 var app = builder.Build();
 

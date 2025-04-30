@@ -1,0 +1,35 @@
+﻿@page
+@model KeyBoardSleepType.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "";
+}
+
+<body>
+    <div class="content">
+
+        <div class="LeftanelContent">
+            @await Html.PartialAsync("~/Pages/Shared/MyComponents/_LeftPanel.cshtml")
+        </div>
+
+        @await Html.PartialAsync("~/Pages/Shared/MyComponents/InputAreaPattern.cshtml")
+
+        <p id="countWords">0</p> <!-- количество слов выбранное пользователем -->
+        <p> / </p> <!-- количество слов выбранное пользователем -->
+        <p id="countWordsNow">0</p> <!-- количество слов ввёденное на данный момент -->
+
+        <button onclick="changeCountWord(10)" style="width: 100px; height: 40px; font-size: 16px;">10</button>
+        <button onclick="changeCountWord(50)" style="width: 100px; height: 40px; font-size: 16px;">50</button>
+        <button onclick="changeCountWord(100)" style="width: 100px; height: 40px; font-size: 16px;">100</button>
+
+    </div>
+</body>
+
+<body>
+
+</body>
+
+
+
+@{
+}

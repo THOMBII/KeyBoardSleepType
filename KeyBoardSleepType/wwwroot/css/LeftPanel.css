@@ -1,0 +1,67 @@
+﻿/* Наложение (фон) */
+.overlay {
+    /* Высота и ширина зависят от того, как вы хотите показать наложение (см. JS ниже) */
+    height: 45%;
+    width: 0;
+    position: fixed; /* Оставаться на месте */
+    z-index: 1; /* Сидеть на вершине */
+    left: 0;
+    background-color: rgba(240,248,255, 0.4); /*Черный с непрозрачностью */
+    overflow-x: hidden; /* Отключить горизонтальную прокрутку */
+    overflow-y: hidden;
+    transition: 0.5s; /* 0.5 секунды эффект перехода, чтобы скользить в или скользить вниз по наложению (высота или ширина, в зависимости от показа) */
+}
+
+/* Расположите содержимое внутри наложения */
+.overlay-content {
+    position: relative;
+    width: 100%; /* 100% ширина */
+    text-align: center; /* Центрированный текст/ссылки */
+    margin-top: 6px; /* 30px верхнее поле, чтобы избежать конфликта с кнопкой закрытия на небольших экранах */
+}
+
+/* Навигационные ссылки внутри наложения */
+.overlay a {
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block; /* Блок дисплея вместо встроенного */
+    transition: 0.3s; /* Эффекты перехода при наведении (цвет) */
+    color: black;
+}
+
+    /* При наведении курсора мыши на навигационные ссылки измените их цвет */
+    .overlay a:hover, .overlay a:focus {
+        color: #f1f1f1;
+    }
+
+/* Расположите кнопку закрыть (верхний правый угол) */
+.overlay .closebtn {
+    display: flex;
+    justify-content: center;
+    font-size: 60px;
+}
+
+/* Если высота экрана меньше 450 пикселей, измените размер шрифта ссылок и снова установите кнопку закрыть, чтобы они не перекрывались */
+@media screen and (max-height: 450px) {
+    .overlay a {
+        font-size: 20px
+    }
+
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+}
+.LeftPanelContent {
+    width: 5px;
+    flex: 1;
+    height: 19Svh;
+    background-color: rgba(240,248,255, 0.4);
+    margin-top: 4vh;
+}
+
+.LeftPanelContent:hover{
+    background-color:aqua;
+}

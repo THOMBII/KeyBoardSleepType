@@ -5,6 +5,7 @@ namespace KeyBoardSleepType.models
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Text> Texts { get; set; } = null!;
+        public DbSet<Words> Words { get; set; } = null!;
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {  }
     }
 }

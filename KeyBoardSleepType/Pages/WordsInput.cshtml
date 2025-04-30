@@ -1,0 +1,29 @@
+﻿@page
+@model KeyBoardSleepType.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "timer";
+}
+
+<body>
+    <div class="content">
+
+        <div class="LeftanelContent">
+            @await Html.PartialAsync("~/Pages/Shared/MyComponents/_LeftPanel.cshtml")
+        </div>
+
+        @await Html.PartialAsync("~/Pages/Shared/MyComponents/InputAreaPattern.cshtml")
+
+        <p id="countdown"></p> <!-- Таймер -->
+        
+        <button onclick="changeTimer(30)" style="width: 100px; height: 40px; font-size: 16px;">30</button>
+        <button onclick="changeTimer(60)" style="width: 100px; height: 40px; font-size: 16px;">60</button>
+        <button onclick="changeTimer(120)" style="width: 100px; height: 40px; font-size: 16px;">120</button>
+        
+    </div>
+</body>
+
+
+
+@{ 
+}

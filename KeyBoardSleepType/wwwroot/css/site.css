@@ -106,6 +106,7 @@ p{
     /*border-bottom: 1px solid #f5f4f0;*/
     color: white;
     width: 720px;
+    margin-right: 4%;
 }
 
 /*Стили строки для ввода текса*/
@@ -135,8 +136,11 @@ input:focus{
 
 /*Стили основного контента*/
 .MainContent {
-    width: 88%;
+    width: 100%;
     margin-top: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .ViewMainText{
@@ -155,22 +159,17 @@ input:focus{
     display: flex;  
 }
 
-.BackLightKey {
-    transition: background-color 0.6s;
-    background-color: aqua;
-}
 
-
-.AllKeyBoard{
+.AllKeyBoard {
     width:750px;
     margin-left: 0%;
     margin-top: 120px;
 }
 
-div.AllKeyBoard .Line div {
+.Line div{
     height: 50px;
     width: 50px;
-    border: 1px solid white;
+    border: 1px solid #b5b8b1; 
     line-height: 40px;
     font-size: 15px;
     float: left;
@@ -180,6 +179,12 @@ div.AllKeyBoard .Line div {
     border-radius: 5px;
     color: white;
 }
+
+.Line div.BackLightKey {
+    transition: background-color 0.6s, border-color 0.6s;
+    background-color: aqua;
+    border-color: #006CB4;
+ }
 
 .IMGStyle {
     width: 35px;
