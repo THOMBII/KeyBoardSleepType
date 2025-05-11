@@ -19,7 +19,7 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: #2d3944;
+    background-color: #071226;
 }
 
 ul {
@@ -34,6 +34,11 @@ li {
 
 p{
     margin: 0;
+}
+
+a, a:visited, a:hover, a:active, a:focus {
+    color: #b5d5e5;
+    text-decoration: none;
 }
 
 .ResultView {
@@ -115,18 +120,14 @@ p{
     color: white;
     transition: background-color 0.6s;
     width: 760px;
-    border-left: none;
-    border-right: none;
-    border-top: none;
+    border: none;
 }
 
 .InputTextStileError {
     transition: background-color 0.6s;
     background-color: gold;
     width: 760px;
-    border-left: none;
-    border-right: none;
-    border-top: none;
+    border: none;
 }
 
 
@@ -161,23 +162,23 @@ input:focus{
 
 
 .AllKeyBoard {
-    width:750px;
+    width: 800px;
     margin-left: 0%;
-    margin-top: 120px;
+    margin-top: 130px;
 }
 
-.Line div{
+.Line div {
     height: 50px;
     width: 50px;
-    border: 1px solid #b5b8b1; 
     line-height: 40px;
     font-size: 15px;
     float: left;
-    margin: 1px;
-    padding: 5px;
+    margin: 3px;
+    padding: 3px;
     text-align: center;
     border-radius: 5px;
     color: white;
+    background-color: #111e32;
 }
 
 .Line div.BackLightKey {

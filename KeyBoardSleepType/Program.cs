@@ -1,8 +1,5 @@
 using KeyBoardSleepType.models;
 using Microsoft.EntityFrameworkCore;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using Npgsql;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +16,7 @@ builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(400);
+    options.IdleTimeout = TimeSpan.FromSeconds(4000);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });

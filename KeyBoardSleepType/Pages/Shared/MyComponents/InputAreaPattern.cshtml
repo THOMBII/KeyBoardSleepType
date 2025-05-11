@@ -3,14 +3,15 @@
 
             <form method="post">
             @Html.AntiForgeryToken()
-                <input type="text" id="inputData" autocomplete="off" spellcheck="false" class="InputTextStile" />
+                <input type="text" id="inputData" autocomplete="off" spellcheck="false" class="InputTextStile fs-4" />
+            @await Html.PartialAsync("~/Pages/Shared/MyComponents/dynamicLine.cshtml")
             </form>
 
             <div class="NoteWrapper">
-                <p id="CompareTextLine1">@Model.LinesToSession[0]</p>
-                <p id="CompareTextLine2">@Model.LinesToSession[1]</p>
-                <p id="CompareTextLine3">@Model.LinesToSession[2]</p>
-                <p id="CompareTextLine4">@Model.LinesToSession[3]</p>
+                <p id="CompareTextLine1" class="fs-4">@Model.LinesToSession[0]</p>
+                <p id="CompareTextLine2" class="fs-4">@Model.LinesToSession[1]</p>
+                <p id="CompareTextLine3" class="fs-4">@Model.LinesToSession[2]</p>
+                <p id="CompareTextLine4" class="fs-4">@Model.LinesToSession[3]</p>
             </div>
 
 

@@ -1,0 +1,23 @@
+﻿.stats-container {
+    display: flex;
+    gap: 10px;
+    font-size: 8px;
+    justify-content: center;
+    margin-right: 30px;
+}
+}
+
+.stat-block {
+    text-align: center;
+}
+
+.stat-title {
+    font-size: 14px;
+    color: #cbd5e1; /* светло-серый */
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 24px;
+    color: white;
+}

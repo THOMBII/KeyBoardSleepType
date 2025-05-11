@@ -10,9 +10,10 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom border-info border-2 box-shadow ">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm ">
             <div class="container">
-                <a class="navbar-brand ps-5 text-white" asp-area="" asp-page="/Index">SleepType <sub>(Alpha)</sub></a>
+                <a class="navbar-brand ps-5 text-colors fs-3" asp-area="" asp-page="/Index">SleepType <sub>(Alpha)</sub></a>
+                @await Html.PartialAsync("~/Pages/Shared/MyComponents/StatisticsWindow.cshtml")
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -33,7 +34,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="module" src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

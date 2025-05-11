@@ -55,13 +55,31 @@
     }
 }
 .LeftPanelContent {
-    width: 5px;
-    flex: 1;
-    height: 19Svh;
+    width: 6px;
+    height: 19vh;
     background-color: rgba(240,248,255, 0.4);
     margin-top: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
 }
 
-.LeftPanelContent:hover{
-    background-color:aqua;
+    .LeftPanelContent:hover {
+        background-color: aqua;
+    }
+
+
+.vertical-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    color: #646e7d;
+    font-size: 16px;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-5%, -50%) rotate(180deg); /* центровка + поворот */
+    pointer-events: none; /* чтобы текст не мешал клику */
 }

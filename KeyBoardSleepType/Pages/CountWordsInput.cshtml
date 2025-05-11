@@ -5,22 +5,25 @@
     ViewData["Title"] = "";
 }
 
+<header>
+    <script src="~/js/CommonScripts.js"></script>
+</header>
 <body>
     <div class="content">
-
+        <script src="~/js/CommonScripts.js"></script>
         <div class="LeftanelContent">
             @await Html.PartialAsync("~/Pages/Shared/MyComponents/_LeftPanel.cshtml")
         </div>
 
         @await Html.PartialAsync("~/Pages/Shared/MyComponents/InputAreaPattern.cshtml")
 
-        <p id="countWords">0</p> <!-- количество слов выбранное пользователем -->
+        <p id="countWordsLim">50</p> <!-- количество слов выбранное пользователем -->
         <p> / </p> <!-- количество слов выбранное пользователем -->
-        <p id="countWordsNow">0</p> <!-- количество слов ввёденное на данный момент -->
+        <p id="wordCounter">0</p> <!-- количество слов ввёденное на данный момент -->
 
-        <button onclick="changeCountWord(10)" style="width: 100px; height: 40px; font-size: 16px;">10</button>
-        <button onclick="changeCountWord(50)" style="width: 100px; height: 40px; font-size: 16px;">50</button>
-        <button onclick="changeCountWord(100)" style="width: 100px; height: 40px; font-size: 16px;">100</button>
+        <button onclick="changeCountWordLimit(10)" data-limit="10" style="width: 100px; height: 40px; font-size: 16px;">10</button>
+        <button onclick="changeCountWordLimit(50)" data-limit="50" style="width: 100px; height: 40px; font-size: 16px;">50</button>
+        <button onclick="changeCountWordLimit(100)" data-limit="100" style="width: 100px; height: 40px; font-size: 16px;">100</button>
 
     </div>
 </body>

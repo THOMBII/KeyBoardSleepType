@@ -1,4 +1,5 @@
 ﻿using KeyBoardSleepType.models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -15,8 +16,10 @@ namespace KeyBoardSleepType.Pages
         private Random random = new Random();
         public string[] LinesToSession = new string[5];
 
+        private int LenghtLine = 60;
+
         public List<string> Lines { get; set; } = new List<string> { "", "", "", "", "", "", "" };
- 
+
 
         private Dictionary<char, string> _RU_Keys = new Dictionary<char, string> {
             {'й', "key_14" }, {'ц', "key_15"}, {'у', "key_16"}, {'к', "key_17"}, {'е', "key_18"}, {'н', "key_19"}, {'г', "key_20"}, {'ш', "key_21"}, {'щ', "key_22"}, {'з', "key_23"}, {'х', "key_24"}, {'ъ', "key_25"},
@@ -35,9 +38,9 @@ namespace KeyBoardSleepType.Pages
             _httpContextAccessor = HttpContextAccessor;
         }
 
-        public async void OnGet(string wordPart)
-            {
-                if (HttpContext.Request.Path == "/")
+        public async Task OnGet(string wordPart)
+        {
+            if (HttpContext.Request.Path == "/")
             {
                 HttpContext.Session.SetInt32("CountWords", _inputModel.CountWords);
                 HttpContext.Session.SetInt32("ErrorCount", _inputModel.ErrorCount);
@@ -47,13 +50,13 @@ namespace KeyBoardSleepType.Pages
             else
                 await ElementsFromDbWordsAsync();
         }
-        public async void OnGetWord()
+        public async Task OnGetWord()
         {
             await ElementsFromDbWordsAsync();
         }
 
         public ActionResult OnPostCheackLetter([FromForm] string inputData = "", [FromForm] int LengthWord = 0)
-         {
+        {
             var str = HttpContext.Session.GetString("Lines_0");
             var err = HttpContext.Session.GetInt32("ErrorCount");
             List<string> answer = new List<string> { "", "" };
@@ -67,33 +70,30 @@ namespace KeyBoardSleepType.Pages
 
                     if (inputData.ToLower() != str[LengthWord].ToString().ToLower())
                     {
-                        if (err == 0)
-                            err = LengthWord;
-
-                        else if (inputData.ToLower() == str[err.Value].ToString().ToLower())
-                            err = 0;
-
+                        err = LengthWord;
                         answer[0] = "key_BackSpace";
                     }
 
-                    else if (err == 0 || err > LengthWord)
+                    else if (LengthWord + 1 <= str.Length && (err == 0 || err >= LengthWord + 1))
                     {
+                        err = 0;
                         answer[0] = _RU_Keys[str.ToLower()[LengthWord + 1]];
                     }
-
                     else
-                        answer[0] = "key_BackSpace";
-
+                    {
+                        answer[0] = "key_BackSpace"; // Или логика завершения строки
+                    }
                     HttpContext.Session.SetInt32("ErrorCount", err.Value);
 
-                   if (LengthWord >= 1)
+                    if (LengthWord >= 1)
                         answer[1] = _RU_Keys[str.ToLower()[LengthWord]];
                     else
                         answer[1] = "key_BackSpace";
                     return new JsonResult(answer);
                 }
 
-            }catch
+            }
+            catch
             {
                 throw new Exception();
             }
@@ -101,9 +101,9 @@ namespace KeyBoardSleepType.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostCheackEnter([FromForm]string page)
+        public async Task<IActionResult> OnPostCheackEnter([FromForm] string Page)
         {
-            Console.WriteLine(page);
+            Console.WriteLine(Page);
             try
             {
                 if (HttpContext.Session.GetString("Lines_1") != "" && HttpContext.Session.GetString("Lines_1") != null)
@@ -120,7 +120,7 @@ namespace KeyBoardSleepType.Pages
                     }
                 }
                 else
-                    switch (page)
+                    switch (Page)
                     {
                         case "WordsInput":
                             await ElementsFromDbWordsAsync();
@@ -133,26 +133,54 @@ namespace KeyBoardSleepType.Pages
                             break;
 
                     }
-                    
-            }catch
+
+            }
+            catch
             {
                 throw new Exception();
             }
 
             return new JsonResult(LinesToSession);
-            
+
         }
 
         public IActionResult OnPostCheackBackSpace([FromForm] string inputData = "", [FromForm] int LengthWord = 0)
         {
-           var str = HttpContext.Session.GetString("Lines_0");
+            var str = HttpContext.Session.GetString("Lines_0");
             List<string> answer = new List<string> { "", "" };
 
-            answer[0] = _RU_Keys[str.ToLower()[LengthWord-1]];
+            answer[0] = _RU_Keys[str.ToLower()[LengthWord - 1]];
             answer[1] = _RU_Keys[str.ToLower()[LengthWord]];
 
             return new JsonResult(answer);
         }
+
+        public IActionResult OnPostSaveWordCount([FromForm] int wordCount, [FromForm] string text, [FromForm] int wordLimiter)
+        {
+            var current = HttpContext.Session.GetInt32("_CountWords") ?? 1;
+            var oneLine = HttpContext.Session.GetInt32("_CountWordsoneLine") ?? 0;
+
+            if (oneLine < wordCount)
+                HttpContext.Session.SetInt32("_CountWordsoneLine", oneLine + 1);
+
+            if (text == "." && (current != current - oneLine))
+            {
+                HttpContext.Session.SetInt32("_CountWords", current + oneLine);
+                HttpContext.Session.SetInt32("_CountWordsoneLine", 0);
+                Console.WriteLine(current + oneLine);
+
+
+                if (current + oneLine >= wordLimiter)
+                {
+                    // Можно перезагрузить задание или вывести сообщение
+                    HttpContext.Session.SetInt32("_CountWords", 0);
+                    return new JsonResult(new { status = "limit_reached" });
+                }
+            }
+
+            return new JsonResult(new { status = "ok", total = oneLine });
+        }
+
 
 
         private async Task ElementsFromDb()
@@ -193,17 +221,16 @@ namespace KeyBoardSleepType.Pages
         }
 
 
-        public async Task ElementsFromDbWordsAsync()  // Изменили возвращаемый тип на Task
+        public async Task ElementsFromDbWordsAsync()
         {
             try
             {
                 EmptySessionStrings();
-                // Получаем значение из сессии или используем 0 по умолчанию
                 var countW = (HttpContext.Session.GetInt32("CountWords") ?? 0) + 1;
                 HttpContext.Session.SetInt32("CountWords", countW);
 
 
-                 var allWords = await _context.Words.AsNoTracking().ToListAsync();
+                var allWords = await _context.Words.AsNoTracking().ToListAsync();
 
                 List<string> textForCompare = allWords
                     .OrderBy(x => random.Next())
@@ -214,7 +241,6 @@ namespace KeyBoardSleepType.Pages
                 int currentLine = 0;
                 WorkingTextFromDatabase(textForCompare, ref currentLine);
 
-                // Сохраняем строки в сессию
                 for (int j = 0; j < LinesToSession.Length && j <= currentLine; j++)
                 {
                     if (!string.IsNullOrEmpty(LinesToSession[j]))
@@ -244,17 +270,17 @@ namespace KeyBoardSleepType.Pages
                         break;
 
                     // Проверяем длину строки
-                    if ((LinesToSession[currentLine].Length + word.Length + 1) <= 80) // +1 для пробела
+                    if ((LinesToSession[currentLine].Length + word.Length + 1) <= LenghtLine) // +1 для пробела
                     {
                         LinesToSession[currentLine] += word + " ";
                     }
                     else
                     {
                         // Удаляем последний пробел, если он есть
-                        if (!string.IsNullOrEmpty(LinesToSession[currentLine]))
-                        {
-                            LinesToSession[currentLine] = LinesToSession[currentLine].TrimEnd();
-                        }
+                        //if (!string.IsNullOrEmpty(LinesToSession[currentLine]))
+                        //{
+                        //    LinesToSession[currentLine] = LinesToSession[currentLine].TrimEnd();
+                        //}
 
                         currentLine++;
 
@@ -289,5 +315,5 @@ namespace KeyBoardSleepType.Pages
                 HttpContext.Session.SetString($"Lines_{i}", string.Empty);
             }
         }
-    } 
+    }
 }
